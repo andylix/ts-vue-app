@@ -1,5 +1,7 @@
 <template>
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <HelloWorld 
+    :subheading="subheading()"
+  />
 </template>
 
 <script lang="ts">
@@ -10,6 +12,14 @@ export default defineComponent({
   name: 'App',
   components: {
     HelloWorld
+  },
+  methods: {
+    heading(): string {
+      return "Vue.js + TypeScript"
+    },
+    subheading(): string {
+      return "It's great!"
+    }
   }
 });
 </script>

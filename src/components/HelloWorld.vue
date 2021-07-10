@@ -1,19 +1,26 @@
+<script lang="ts" setup>
+import { defineProps, computed } from 'vue';
+import $string from '@/types/string'
+
+// interface HelloWorldProps {
+//   heading: string,
+//   subheading: string
+// }
+
+const props = defineProps({
+  heading: $string('default heading'),
+  subheading: $string('default subheading')
+})
+
+const shortheading = computed(() => props.heading.substr(0, 15))
+</script>
+
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>{{ shortheading }}</h1>
+    <h2>{{ subheading }}</h2>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'HelloWorld',
-  props: {
-    msg: String,
-  },
-});
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
