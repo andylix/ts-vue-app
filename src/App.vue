@@ -8,14 +8,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import HelloWorld from './components/HelloWorld.vue';
+import { numberOptional } from '@/types/v-prop-types'
 
 export default defineComponent({
   name: 'App',
   props: {
-    foo: {
-      required: false,
-      type: Number
-    } 
+    foo: numberOptional() 
   },
   components: {
     HelloWorld
