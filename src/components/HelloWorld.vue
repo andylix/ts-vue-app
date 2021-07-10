@@ -8,8 +8,8 @@ import $string from '@/types/string'
 // }
 
 const props = defineProps({
-  heading: $string('default heading'),
-  subheading: $string('default subheading')
+  heading: $string,
+  subheading: $string
 })
 
 const shortheading = computed(() => props.heading.substr(0, 15))
