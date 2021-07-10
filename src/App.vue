@@ -1,5 +1,6 @@
 <template>
   <HelloWorld 
+    :heading="heading()"
     :subheading="subheading()"
   />
 </template>
@@ -10,8 +11,17 @@ import HelloWorld from './components/HelloWorld.vue';
 
 export default defineComponent({
   name: 'App',
+  props: {
+    foo: {
+      required: false,
+      type: Number
+    } 
+  },
   components: {
     HelloWorld
+  },
+  mounted() {
+    console.log('hello', this.foo)
   },
   methods: {
     heading(): string {

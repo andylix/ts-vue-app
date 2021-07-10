@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 import { defineProps, computed } from 'vue';
-import $string from '@/types/string'
+import { stringRequired, stringOptional } from '@/types/v-prop-types'
 
-// interface HelloWorldProps {
+// const props = defineProps<{
 //   heading: string,
 //   subheading: string
-// }
+// }>()
 
 const props = defineProps({
-  heading: $string,
-  subheading: $string
+  heading: stringOptional('My App'),
+  subheading: stringRequired()
 })
 
 const shortheading = computed(() => props.heading.substr(0, 15))
