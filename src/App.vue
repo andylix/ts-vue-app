@@ -2,13 +2,26 @@
   <HelloWorld 
     :heading="heading()"
     :time="time"
+    :obj="{ foo: 'obj' }"
   />
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import HelloWorld from './components/HelloWorld.vue';
 import { numberOptional } from '@/types/v-prop-types'
+
+function useCounting(start: number) {
+
+  const time = ref(start)
+
+  onMounted(() => {
+    console.log('useCounting', 'onMounted()')
+    setInterval(() => time.value += 1, 1000)
+  })
+
+  return time
+}
 
 export default defineComponent({
   name: 'App',
@@ -16,16 +29,14 @@ export default defineComponent({
     foo: numberOptional() 
   },
   setup() {
-    return {
-      time: ref(0)
-    }
+    const time = useCounting(100)
+    return { time }
   },
   components: {
     HelloWorld
   },
   mounted() {
-    console.log('mounted()')
-    setInterval(() => this.time += 1, 1000)
+    console.log('App', 'mounted()')
   },
   methods: {
     heading(): string {
