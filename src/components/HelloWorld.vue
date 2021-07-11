@@ -1,15 +1,20 @@
 <script lang="ts" setup>
-import { defineProps, computed, toRefs } from 'vue';
+import { defineProps, computed, withDefaults } from 'vue';
 // import { stringRequired, stringOptional, arrayRequired } from '@/types/v-prop-types'
 
-const props = defineProps<{
-  heading: string,
+interface Props {
+  heading?: string,
   time?: number,
-  items?: Array<number>
-}>()
+  items?: number[],
+  obj?: Record<string, unknown>,
+}
 
-const time = computed(() => props.time || 0)
-const items = computed(() => props.items || [1,2,3])
+const props = withDefaults(defineProps<Props>(), {
+  heading: '',
+  time: 0,
+  items: () => [1,2,3,4],
+  obj: () => ({ foo: 'x' })
+})
 
 // const props = Object.assign({}, _props, { items: [1,2,3] })
 
