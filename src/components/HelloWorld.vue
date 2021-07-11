@@ -6,7 +6,7 @@ interface Props {
   heading?: string,
   time?: number,
   items?: number[],
-  obj?: Record<string, unknown>,
+  obj?: { foo: string },
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -34,7 +34,7 @@ const shortheading = computed(() => props.heading.substr(0, 15))
     <ul v-if="items !== undefined">
       <li v-for="(item, i) in items" :key="i">{{ item }}</li>
     </ul>
-    <p v-else>NO items</p>
+    <p>{{ props.obj.foo }}</p>
   </div>
 </template>
 

@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import HelloWorld from './components/HelloWorld.vue';
 import { numberOptional } from '@/types/v-prop-types'
 
@@ -15,16 +15,16 @@ export default defineComponent({
   props: {
     foo: numberOptional() 
   },
-  data() {
+  setup() {
     return {
-      time: 0
+      time: ref(0)
     }
   },
   components: {
     HelloWorld
   },
   mounted() {
-    console.log('hello', this.foo)
+    console.log('mounted()')
     setInterval(() => this.time += 1, 1000)
   },
   methods: {
