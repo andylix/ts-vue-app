@@ -46,3 +46,26 @@ export function numberOptional(defaultValue?: number) {
   }
 }
 
+/*
+-----
+Array
+-----
+*/
+
+// required
+export function arrayRequired(): { type: ArrayConstructor, required: true } {
+  return { type: Array, required: true as const }
+}
+// OL: optional with no default value
+export function arrayOptional(): { type: ArrayConstructor, required: false };
+// OL: optional with default value
+export function arrayOptional<T>(defaultValue: Array<T>): { type: ArrayConstructor, required: false, default: Array<T> };
+// IMPL
+export function arrayOptional<T>(defaultValue?: Array<T>) {
+  if(defaultValue === undefined) {
+    return { type: Array, required: false as const }
+  }
+  else {
+    return { type: Array, required: false as const, default: defaultValue }
+  }
+}

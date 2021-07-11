@@ -1,7 +1,7 @@
 <template>
   <HelloWorld 
     :heading="heading()"
-    :subheading="subheading()"
+    :time="time"
   />
 </template>
 
@@ -15,18 +15,21 @@ export default defineComponent({
   props: {
     foo: numberOptional() 
   },
+  data() {
+    return {
+      time: 0
+    }
+  },
   components: {
     HelloWorld
   },
   mounted() {
     console.log('hello', this.foo)
+    setInterval(() => this.time += 1, 1000)
   },
   methods: {
     heading(): string {
       return "Vue.js + TypeScript"
-    },
-    subheading(): string {
-      return "It's great!"
     }
   }
 });

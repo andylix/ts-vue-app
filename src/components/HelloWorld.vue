@@ -1,16 +1,22 @@
 <script lang="ts" setup>
-import { defineProps, computed } from 'vue';
-import { stringRequired, stringOptional } from '@/types/v-prop-types'
+import { defineProps, computed, watchEffect } from 'vue';
+// import { stringRequired, stringOptional, arrayRequired } from '@/types/v-prop-types'
 
-// const props = defineProps<{
-//   heading: string,
-//   subheading: string
-// }>()
+const props = defineProps<{
+  heading: string,
+  time: number,
+  items?: Array<number>
+}>()
 
-const props = defineProps({
-  heading: stringOptional('My App'),
-  subheading: stringRequired()
-})
+const items = props.items || [1,2,3]
+
+// const props = Object.assign({}, _props, { items: [1,2,3] })
+
+// const props = defineProps({
+//   heading: stringOptional('My App'),
+//   subheading: stringRequired(),
+//   items: arrayRequired()
+// })
 
 const shortheading = computed(() => props.heading.substr(0, 15))
 </script>
@@ -18,7 +24,11 @@ const shortheading = computed(() => props.heading.substr(0, 15))
 <template>
   <div class="hello">
     <h1>{{ shortheading }}</h1>
-    <h2>{{ subheading }}</h2>
+    <h2>{{ props.time }}</h2>
+    <ul v-if="items !== undefined">
+      <li v-for="(item, i) in items" :key="i">{{ item }}</li>
+    </ul>
+    <p v-else>NO items</p>
   </div>
 </template>
 
