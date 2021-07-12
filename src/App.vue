@@ -4,12 +4,13 @@
     :time="time"
     :obj="{ foo: 'obj' }"
   />
+  <p>foo: {{ foo }}</p>
+  <p>bar1: {{ bar1 }}</p>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
+import { defineComponent, onMounted, ref, PropType } from 'vue';
 import HelloWorld from './components/HelloWorld.vue';
-import { numberOptional } from '@/types/v-prop-types'
 
 function useCounting(start: number) {
 
@@ -26,7 +27,10 @@ function useCounting(start: number) {
 export default defineComponent({
   name: 'App',
   props: {
-    foo: numberOptional() 
+    foo: {
+      type: Number as PropType<number>,
+      default: 1,
+    }
   },
   setup() {
     const time = useCounting(100)
@@ -39,8 +43,13 @@ export default defineComponent({
     console.log('App', 'mounted()')
   },
   methods: {
-    heading(): string {
+    heading() {
       return "Vue.js + TypeScript"
+    }
+  },
+  computed: {
+    bar1(): number {
+      return this.foo * 100
     }
   }
 });
