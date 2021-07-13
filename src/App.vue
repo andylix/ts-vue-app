@@ -3,6 +3,7 @@
     :heading="heading()"
     :time="time"
     :obj="{ foo: 'obj' }"
+    v-on:count-added="countAdded"
   />
   <p>foo: {{ foo }}</p>
   <p>bar1: {{ bar1 }}</p>
@@ -45,6 +46,9 @@ export default defineComponent({
   methods: {
     heading() {
       return "Vue.js + TypeScript"
+    },
+    countAdded(count: number) {
+      console.log('count added', count)
     }
   },
   computed: {
