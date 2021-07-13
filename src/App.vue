@@ -3,7 +3,11 @@
     :heading="heading()"
     :time="time"
     :obj="{ foo: 'obj' }"
-    v-on:count-added="countAdded"
+  />
+
+  <Counter
+    v-on:clicked="counterClicked"
+    :count="count"
   />
   <p>foo: {{ foo }}</p>
   <p>bar1: {{ bar1 }}</p>
@@ -12,6 +16,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref, PropType } from 'vue';
 import HelloWorld from './components/HelloWorld.vue';
+import Counter from './components/Counter';
 
 function useCounting(start: number) {
 
@@ -27,6 +32,9 @@ function useCounting(start: number) {
 
 export default defineComponent({
   name: 'App',
+  components: {
+    HelloWorld, Counter
+  },
   props: {
     foo: {
       type: Number as PropType<number>,
@@ -35,10 +43,8 @@ export default defineComponent({
   },
   setup() {
     const time = useCounting(100)
-    return { time }
-  },
-  components: {
-    HelloWorld
+    const count = ref(101)
+    return { time, count }
   },
   mounted() {
     console.log('App', 'mounted()')
@@ -49,6 +55,9 @@ export default defineComponent({
     },
     countAdded(count: number) {
       console.log('count added', count)
+    },
+    counterClicked(prev: number) {
+      this.count += 1
     }
   },
   computed: {
